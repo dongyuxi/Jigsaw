@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Jigsaw</string>
-    <string name="welcome">Welcome to Jigsaw!</string>
+    <string name="game_info">Game Information</string>
+    <string name="level_up">Level Up!</string>
+    <string name="go">Go</string>
     <string name="action_settings">Settings</string>
 
 </resources>

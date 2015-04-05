@@ -1,19 +1,37 @@
 package com.orange.jigsaw;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.orange.jigsaw.view.ImageLayout;
+import com.orange.jigsaw.view.ImageLayoutListener;
 
 public class MainActivity extends Activity {
+
+    private ImageLayout imageLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        imageLayout = (ImageLayout)findViewById(R.id.jigsawLayout);
+        imageLayout.setImageListener(new ImageLayoutListener() {
+            @Override
+            public void nextLevel() {
+                new AlertDialog.Builder(MainActivity.this).setTitle(R.string.game_info).setMessage(R.string.level_up).setPositiveButton(R.string.go, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        imageLayout.nextLevel();
+                    }
+                }).show();
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

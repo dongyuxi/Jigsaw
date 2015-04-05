@@ -30,8 +30,9 @@ import java.util.List;
 public class ImageLayout extends RelativeLayout implements View.OnClickListener {
     private static final String CONNECTOR = "-";
     private static final int DURATION_TIME = 500;
+    private static final int TIME_BASE = 60;
 
-    /** Image has been splited into piece * piece. */
+    /** Image has been split into piece * piece. */
     private int piece = 3;
     /** Padding. */
     private int padding;
@@ -64,6 +65,8 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
     private boolean isInAnimation = false;
 
     private static final int NEXT_LEVEL = 0x0000;
+    private static final int STEP_CHANGE = 0x0001;
+    private static final int TIME_CHANGE = 0x0002;
 
     /** Callback listener instance. */
     private ImageLayoutListener imageListener;
@@ -73,16 +76,42 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         this.imageListener = imageListener;
     }
 
+    /** Current step. */
+    private int currentStep;
+    /** Current time. */
+    private int currentTime;
+
+    /** Flag to mark if game is over or not.  */
+    private boolean isGameOver;
+
     /** Handler which will refresh ImageLayout. */
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case NEXT_LEVEL:
-                    if (null == imageListener) {
-                        nextLevel();
+                    if (null != imageListener) {
+                        imageListener.nextLevel();
                     } else {
-                       imageListener.nextLevel();
+                        nextLevel();
                     }
+                    break;
+                case STEP_CHANGE:
+                    if (null != imageListener) {
+                        imageListener.stepChange(currentStep);
+                    }
+                    break;
+                case TIME_CHANGE:
+                    if (0 == currentTime) {
+                        isGameOver = true;
+                    }
+                    if (isGameOver) {
+                        return;
+                    }
+                    if (null != imageListener) {
+                        currentTime--;
+                        imageListener.timeChange(currentTime);
+                    }
+                    handler.sendEmptyMessageDelayed(TIME_CHANGE, 1000);
                     break;
                 default:
                     break;
@@ -106,6 +135,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
     private void init() {
         margin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MARGIN, getResources().getDisplayMetrics());
         padding = Math.min(Math.min(getPaddingBottom(), getPaddingTop()), Math.min(getPaddingLeft(), getPaddingRight()));
+        currentStep = 0;
     }
 
     @Override
@@ -117,6 +147,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         if (first) {
             initBitmap();
             initViews();
+            initTime();
             first = false;
         }
 
@@ -173,6 +204,11 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         }
     }
 
+    private void initTime() {
+        currentTime = (int)Math.pow(2, piece - 3) * TIME_BASE;
+        handler.sendEmptyMessage(TIME_CHANGE);
+    }
+
     @Override
     public void onClick(View view) {
         if (isInAnimation) {
@@ -194,6 +230,8 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
      * Using TranslateAnimation.
      */
     private void exchangeSelectImages() {
+        currentStep++;
+        handler.sendEmptyMessage(STEP_CHANGE);
         firstSelectedView.setColorFilter(null);
         setupAnimationLayout();
 
@@ -346,6 +384,15 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         piece++;
         initBitmap();
         initViews();
+        initTime();
+        currentStep = 0;
     }
 
+    /**
+     * Get current level.
+     * @return
+     */
+    public int getLevel() {
+        return piece - 2;
+    }
 }

@@ -6,4 +6,6 @@ package com.orange.jigsaw.view;
  */
 public interface ImageLayoutListener {
     void nextLevel();
+    void stepChange(int currentStep);
+    void timeChange(int currentTime);
 }

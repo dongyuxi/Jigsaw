@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.orange.jigsaw.view.ImageLayout;
 import com.orange.jigsaw.view.ImageLayoutListener;
@@ -13,6 +14,9 @@ import com.orange.jigsaw.view.ImageLayoutListener;
 public class MainActivity extends Activity {
 
     private ImageLayout imageLayout;
+    private TextView levelTextView;
+    private TextView stepTextView;
+    private TextView timeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         imageLayout = (ImageLayout)findViewById(R.id.jigsawLayout);
+        levelTextView = (TextView)findViewById(R.id.level);
+        stepTextView = (TextView)findViewById(R.id.step);
+        timeTextView = (TextView)findViewById(R.id.time);
         imageLayout.setImageListener(new ImageLayoutListener() {
             @Override
             public void nextLevel() {
@@ -27,10 +34,22 @@ public class MainActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         imageLayout.nextLevel();
+                        levelTextView.setText("" + imageLayout.getLevel());
                     }
                 }).show();
             }
+
+            @Override
+            public void stepChange(int currentStep) {
+                stepTextView.setText("" + currentStep);
+            }
+
+            @Override
+            public void timeChange(int currentTime) {
+                timeTextView.setText("" + currentTime);
+            }
         });
+
     }
 
     @Override

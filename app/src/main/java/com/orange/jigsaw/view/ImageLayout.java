@@ -422,6 +422,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
      */
     public void restart() {
         piece--;
+        handler.removeMessages(TIME_CHANGE);
         nextLevel();
     }
 
@@ -430,6 +431,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
      */
     public void reset() {
         piece = 2;
+        handler.removeMessages(TIME_CHANGE);
         nextLevel();
     }
 
@@ -440,6 +442,9 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         if (!isGamePaused) {
             isGamePaused = true;
             handler.removeMessages(TIME_CHANGE);
+            for (int i = 0; i < imageViews.length; i++) {
+                imageViews[i].setColorFilter(Color.GRAY, PorterDuff.Mode.CLEAR);
+            }
         }
     }
 
@@ -447,8 +452,13 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
      * Resume game.
      */
     public void resume() {
-        isGamePaused = false;
-        handler.sendEmptyMessage(TIME_CHANGE);
+        if (isGamePaused) {
+            isGamePaused = false;
+            handler.sendEmptyMessage(TIME_CHANGE);
+            for (int i = 0; i < imageViews.length; i++) {
+                imageViews[i].setColorFilter(null);
+            }
+        }
     }
 
 }

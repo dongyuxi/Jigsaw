@@ -14,9 +14,10 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_above="@id/jigsawLayout"
-        android:layout_margin="3dp">
+        android:layout_margin="3dp"
+        android:id="@+id/relativeLayout">
 
         <TextView
             android:id="@+id/levelText"
@@ -43,8 +44,7 @@
             android:padding="4dp"
             android:layout_below="@id/levelText"
             android:background="@drawable/field_circle"
-            android:text="1"
-        />
+            android:text="1"/>
         <TextView
             android:id="@+id/step"
             android:layout_width="70dp"
@@ -54,8 +54,7 @@
             android:layout_below="@id/stepText"
             android:layout_centerHorizontal="true"
             android:background="@drawable/field_circle"
-            android:text="0"
-            />
+            android:text="0"/>
         <TextView
             android:id="@+id/time"
             android:layout_width="70dp"
@@ -65,8 +64,42 @@
             android:layout_below="@id/timeText"
             android:layout_alignParentRight="true"
             android:background="@drawable/field_circle"
-            android:text="300"
-            />
+            android:text="300"/>
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jigsawLayout">
+        <Button
+            android:id="@+id/pauseResumeButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/pause"
+            android:textSize="15dp"/>
+        <Button
+            android:id="@+id/restartButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/restart"
+            android:textSize="15dp"/>
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/reset"
+            android:textSize="15dp"/>
+        <Button
+            android:id="@+id/quitButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/quit"
+            android:textSize="15dp"/>
+    </LinearLayout>
 
 </RelativeLayout>

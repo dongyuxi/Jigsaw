@@ -4,7 +4,13 @@
     <string name="app_name">Jigsaw</string>
     <string name="game_info">Game Information</string>
     <string name="level_up">Level Up!</string>
+    <string name="game_over">Game Over!</string>
     <string name="go">Go</string>
+    <string name="restart">Restart</string>
+    <string name="reset">Reset</string>
+    <string name="quit">Quit</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
     <string name="action_settings">Settings</string>
 
 </resources>

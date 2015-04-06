@@ -23,19 +23,19 @@
             android:id="@+id/levelText"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="Level"/>
+            android:text="@string/level"/>
         <TextView
             android:id="@+id/stepText"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_centerHorizontal="true"
-            android:text="Step"/>
+            android:text="@string/step"/>
         <TextView
             android:id="@+id/timeText"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:text="Time"/>
+            android:text="@string/Time"/>
         <TextView
             android:id="@+id/level"
             android:layout_width="70dp"
@@ -77,29 +77,25 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/pause"
-            android:textSize="15dp"/>
+            android:text="@string/pause"/>
         <Button
             android:id="@+id/restartButton"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/restart"
-            android:textSize="15dp"/>
+            android:text="@string/restart"/>
         <Button
             android:id="@+id/resetButton"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/reset"
-            android:textSize="15dp"/>
+            android:text="@string/reset"/>
         <Button
             android:id="@+id/quitButton"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/quit"
-            android:textSize="15dp"/>
+            android:text="@string/quit"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -11,6 +11,9 @@
     <string name="quit">Quit</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
+    <string name="level">Level</string>
+    <string name="step">Step</string>
+    <string name="Time">Time</string>
     <string name="action_settings">Settings</string>
 
 </resources>

@@ -80,8 +80,10 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
     /** Current step. */
     private int currentStep;
     /** Current time. */
-    private int currentTime;
+    private int currentTime = 0;
 
+    /** Flag to mark if game is successful. */
+    private boolean isGameSuccess;
     /** Flag to mark if game is over or not. */
     private boolean isGameOver;
 
@@ -105,7 +107,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
                     }
                     break;
                 case TIME_CHANGE:
-                    if (isGameOver || isGamePaused) {
+                    if (isGameSuccess || isGameOver || isGamePaused) {
                         return;
                     }
                     if (null != imageListener) {
@@ -113,7 +115,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
                     }
                     if (0 == currentTime) {
                         isGameOver = true;
-                        imageListener.gameOver();
+                        handler.sendEmptyMessage(GAME_OVER);
                         return;
                     }
                     currentTime--;
@@ -147,6 +149,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         margin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MARGIN, getResources().getDisplayMetrics());
         padding = Math.min(Math.min(getPaddingBottom(), getPaddingTop()), Math.min(getPaddingLeft(), getPaddingRight()));
         currentStep = 0;
+        initTime();
     }
 
     @Override
@@ -156,12 +159,12 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         length = Math.min(getMeasuredWidth(), getMeasuredHeight());
 
         if (first) {
+            isGameSuccess = false;
             isGameOver = false;
             isGamePaused = false;
             first = false;
             initBitmap();
             initViews();
-            initTime();
         }
 
         setMeasuredDimension(length, length);
@@ -384,6 +387,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
             }
         }
         if (success) {
+            isGameSuccess = true;
             handler.sendEmptyMessage(NEXT_LEVEL);
         }
     }
@@ -395,6 +399,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         this.removeAllViews();
         animationLayout = null;
         piece++;
+        isGameSuccess = false;
         isGameOver = false;
         isGamePaused = false;
         currentStep = 0;

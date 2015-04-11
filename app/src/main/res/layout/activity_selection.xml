@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <com.orange.jigsaw.view.HeroLayout
+        android:id="@+id/jigsawLevelLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="3dp"
+        android:layout_centerInParent="true"/>
+
+    <Switch
+        android:id="@+id/levelImageStyleSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="@string/classic_style"
+        android:textOff="@string/cute_style"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:checked="true" />
+
+    <SeekBar
+        android:id="@+id/difficultySeekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/jigsawLevelLayout"
+        android:layout_alignEnd="@+id/levelImageStyleSwitch"
+        android:layout_alignStart="@+id/levelImageStyleSwitch"
+        android:max="3"
+        android:progress="0"/>
+    
+    <TextView
+        android:id="@+id/pieceTextView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:layout_margin="4dp"
+        android:layout_above="@id/jigsawLevelLayout"
+        android:layout_toLeftOf="@id/difficultySeekBar"
+        android:background="@drawable/field_circle"
+        android:text="3 * 3"/>
+    <TextView
+        android:id="@+id/difficultyTextView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:layout_margin="4dp"
+        android:layout_above="@id/jigsawLevelLayout"
+        android:layout_toRightOf="@id/difficultySeekBar"
+        android:background="@drawable/field_circle"
+        android:text="@string/easy"/>
+</RelativeLayout>

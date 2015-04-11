@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.orange.jigsaw.view.ImageLayout;
 import com.orange.jigsaw.view.ImageLayoutListener;
 
+/**
+ * Main game activity.
+ */
 public class MainActivity extends Activity {
 
     private ImageLayout imageLayout;

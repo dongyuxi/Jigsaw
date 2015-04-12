@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.orange.jigsaw.R;
 import com.orange.jigsaw.utils.HeroSelectionBackgroundImages;
+import com.orange.jigsaw.utils.PieceDifficultyUtils;
 import com.orange.jigsaw.view.HeroLayout;
 
 /**
@@ -51,20 +52,7 @@ public class SelectionActivity extends Activity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int piece = progress + 3;
                 pieceTextView.setText(piece + " * " + piece);
-                switch (piece) {
-                    case 3:
-                        difficultyTextView.setText(R.string.easy);
-                        break;
-                    case 4:
-                        difficultyTextView.setText(R.string.normal);
-                        break;
-                    case 5:
-                        difficultyTextView.setText(R.string.hard);
-                        break;
-                    default:
-                        difficultyTextView.setText(R.string.nightmare);
-                        break;
-                }
+                difficultyTextView.setText(PieceDifficultyUtils.getDifficultyStringResourceId(piece));
             }
 
             @Override
@@ -82,7 +70,7 @@ public class SelectionActivity extends Activity {
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                heroLayout.startGame();
+                heroLayout.startGame(difficultySeekBar.getProgress() + 3);
             }
         });
     }

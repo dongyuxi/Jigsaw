@@ -30,12 +30,24 @@ public class HeroSelectionBackgroundImages {
                             R.drawable.level7morgana1,
                             R.drawable.level8sona1,
                             R.drawable.level9vayne1,
+                    },
+                    {
+                            R.drawable.level1ashe2,
+                            R.drawable.level2caitlyn2,
+                            R.drawable.level3evelynn2,
+                            R.drawable.level4leblanc2,
+                            R.drawable.level5lux2,
+                            R.drawable.level6missfortune2,
+                            R.drawable.level7morgana2,
+                            R.drawable.level8sona2,
+                            R.drawable.level9vayne2,
                     }
             };
 
     public enum Style {
         CLASSIC(0),
-        CUTE(1);
+        CUTE(1),
+        JIGSAW(2);
 
         private int index;
 

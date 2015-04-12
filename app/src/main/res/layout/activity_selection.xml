@@ -41,7 +41,8 @@
         android:layout_above="@id/jigsawLevelLayout"
         android:layout_toLeftOf="@id/difficultySeekBar"
         android:background="@drawable/field_circle"
-        android:text="3 * 3"/>
+        android:text="3 * 3"
+        android:textColor="@android:color/black"/>
     <TextView
         android:id="@+id/difficultyTextView"
         android:layout_width="70dp"
@@ -51,7 +52,8 @@
         android:layout_above="@id/jigsawLevelLayout"
         android:layout_toRightOf="@id/difficultySeekBar"
         android:background="@drawable/field_circle"
-        android:text="@string/easy"/>
+        android:text="@string/easy"
+        android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/startGameButton"

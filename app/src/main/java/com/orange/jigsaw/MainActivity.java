@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.orange.jigsaw.utils.PieceDifficultyUtils;
 import com.orange.jigsaw.view.ImageLayout;
 import com.orange.jigsaw.view.ImageLayoutListener;
 
@@ -26,7 +25,7 @@ public class MainActivity extends Activity {
     private boolean pause = true;
     private Button restartButton;
     private Button resetButton;
-    private Button quitButton;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +36,12 @@ public class MainActivity extends Activity {
         levelTextView = (TextView)findViewById(R.id.level);
         stepTextView = (TextView)findViewById(R.id.step);
         timeTextView = (TextView)findViewById(R.id.time);
+
+        int selectedIndex = getIntent().getIntExtra(getResources().getResourceName(R.string.selected_hero), 0);
+        int selectedPiece = getIntent().getIntExtra(getResources().getResourceName(R.string.selected_piece), 3);
+        imageLayout.setSelectedIndex(selectedIndex);
+        imageLayout.setPiece(selectedPiece);
+        levelTextView.setText(PieceDifficultyUtils.getDifficultyStringResourceId(selectedPiece));
         imageLayout.setImageListener(new ImageLayoutListener() {
             @Override
             public void nextLevel() {
@@ -48,7 +53,7 @@ public class MainActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 imageLayout.nextLevel();
-                                levelTextView.setText("" + imageLayout.getLevel());
+                                levelTextView.setText(PieceDifficultyUtils.getDifficultyStringResourceId(imageLayout.getLevel() + 2));
                             }
                         }).show();
             }
@@ -117,8 +122,8 @@ public class MainActivity extends Activity {
                 imageLayout.reset();
             }
         });
-        quitButton = (Button)findViewById(R.id.quitButton);
-        quitButton.setOnClickListener(new View.OnClickListener() {
+        backButton = (Button)findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

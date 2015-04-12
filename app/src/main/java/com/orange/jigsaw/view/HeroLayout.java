@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.orange.jigsaw.MainActivity;
+import com.orange.jigsaw.R;
 import com.orange.jigsaw.utils.HeroSelectionBackgroundImages;
 
 /**
@@ -126,9 +127,11 @@ public class HeroLayout extends RelativeLayout {
         }
     }
 
-    public void startGame() {
+    public void startGame(int selectedPiece) {
         Intent intent = new Intent();
         intent.setClass(getContext(), MainActivity.class);
+        intent.putExtra(getResources().getResourceName(R.string.selected_hero), selectedHero);
+        intent.putExtra(getResources().getResourceName(R.string.selected_piece), selectedPiece);
         getContext().startActivity(intent);
     }
 }

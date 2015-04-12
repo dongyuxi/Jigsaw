@@ -5,10 +5,11 @@
     <string name="game_info">游戏信息</string>
     <string name="level_up">升级了！进入下一个难度！</string>
     <string name="game_over">游戏结束</string>
-    <string name="go">马上去</string>
+    <string name="go">OK</string>
     <string name="restart">重新开始</string>
     <string name="reset">从头再来</string>
     <string name="quit">退出</string>
+    <string name="back">返回</string>
     <string name="pause">暂停</string>
     <string name="resume">继续</string>
     <string name="action_settings">设置</string>
@@ -27,4 +28,6 @@
     <string name="nightmare">噩梦</string>
 
     <string name="top_level">恭喜！已经通关这个英雄，换个英雄玩一玩吧？</string>
+    <string name="contact_me">关于</string>
+    <string name="contact_me_info">请通过dongyuxi2004@163.com联系我。</string>
 </resources>

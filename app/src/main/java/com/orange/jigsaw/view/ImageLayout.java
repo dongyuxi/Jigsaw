@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.orange.jigsaw.R;
 import com.orange.jigsaw.activity.SelectionActivity;
+import com.orange.jigsaw.utils.HeroSelectionBackgroundImages;
 import com.orange.jigsaw.utils.ImagePiece;
 import com.orange.jigsaw.utils.ImageSpliter;
 
@@ -43,6 +44,8 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
     private static final int MARGIN = 3;
     private int margin;
 
+    /** Selected hero index. */
+    private int selectedIndex = 0;
     /** Source picture. */
     private Bitmap image;
     /** Random pieces list. */
@@ -151,8 +154,6 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
     private void init() {
         margin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MARGIN, getResources().getDisplayMetrics());
         padding = Math.min(Math.min(getPaddingBottom(), getPaddingTop()), Math.min(getPaddingLeft(), getPaddingRight()));
-        currentStep = 0;
-        initTime();
     }
 
     @Override
@@ -162,15 +163,24 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         length = Math.min(getMeasuredWidth(), getMeasuredHeight());
 
         if (first) {
-            isGameSuccess = false;
-            isGameOver = false;
-            isGamePaused = false;
+            initResources();
             first = false;
-            initBitmap();
-            initViews();
         }
 
         setMeasuredDimension(length, length);
+    }
+
+    /**
+     * Initialize all resources of ImageLayout.
+     */
+    private void initResources() {
+        isGameSuccess = false;
+        isGameOver = false;
+        isGamePaused = false;
+        currentStep = 0;
+        initBitmap();
+        initViews();
+        initTime();
     }
 
     /**
@@ -178,7 +188,7 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
      */
     private void initBitmap() {
         if (null == image) {
-            image = BitmapFactory.decodeResource(getResources(), R.drawable.arilia);
+            image = BitmapFactory.decodeResource(getResources(), HeroSelectionBackgroundImages.getHeroBackgroundImages(HeroSelectionBackgroundImages.Style.JIGSAW)[selectedIndex]);
         }
         imagePieces = ImageSpliter.splitImage(image, piece);
         Collections.sort(imagePieces, new Comparator<ImagePiece>() {
@@ -408,14 +418,8 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
             intent.setClass(getContext(), SelectionActivity.class);
             return;
         }
-        isGameSuccess = false;
-        isGameOver = false;
-        isGamePaused = false;
-        currentStep = 0;
+        initResources();
         handler.sendEmptyMessage(STEP_CHANGE);
-        initBitmap();
-        initViews();
-        initTime();
     }
 
     /**
@@ -468,6 +472,14 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
                 imageViews[i].setColorFilter(null);
             }
         }
+    }
+
+    public void setPiece(int piece) {
+        this.piece = piece;
+    }
+
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
     }
 
 }

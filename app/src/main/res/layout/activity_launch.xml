@@ -2,13 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/field_background">
+    android:background="@drawable/background">
 
     <Button
         android:id="@+id/selectGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_game"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_above="@+id/contactMeButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/contactMeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_me"
+        android:layout_above="@+id/quitGameButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/quitGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -32,4 +32,10 @@
     <string name="top_level">Congratulations!You have passed the hardest level of this hero, try another one?</string>
     <string name="contact_me">About</string>
     <string name="contact_me_info">Please contact me via dongyuxi2004@163.com</string>
+
+    <string name="wall_ad">Getting Free Points</string>
+    <string name="insert_ad">Getting Surprise Here</string>
+
+    <string name="show_wall_ad">Show Points Wall</string>
+    <string name="quit_wall_ad">Quit Points Wall</string>
 </resources>

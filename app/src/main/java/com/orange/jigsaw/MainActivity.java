@@ -4,13 +4,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.orange.jigsaw.utils.PieceDifficultyUtils;
 import com.orange.jigsaw.view.ImageLayout;
 import com.orange.jigsaw.view.ImageLayoutListener;
+
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+import net.youmi.android.banner.AdViewListener;
+import net.youmi.android.spot.SpotDialogListener;
+import net.youmi.android.spot.SpotManager;
 
 /**
  * Main game activity.
@@ -31,6 +39,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Youmi Ad resources
+        SpotManager.getInstance(this).loadSpotAds();
+        SpotManager.getInstance(this).setAnimationType(SpotManager.ANIM_ADVANCE);
+        SpotManager.getInstance(this).setSpotOrientation(SpotManager.ORIENTATION_PORTRAIT);
 
         imageLayout = (ImageLayout)findViewById(R.id.jigsawLayout);
         levelTextView = (TextView)findViewById(R.id.level);
@@ -80,11 +93,11 @@ public class MainActivity extends Activity {
                                 imageLayout.restart();
                             }
                         }).setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                imageLayout.reset();
-                            }
-                        }).setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        imageLayout.reset();
+                    }
+                }).setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         finish();
@@ -98,6 +111,19 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (pause) {
+                    // Show Youmi Ad
+                    SpotManager.getInstance(MainActivity.this).showSpotAds(
+                            MainActivity.this, new SpotDialogListener() {
+                                @Override
+                                public void onShowSuccess() {
+                                }
+                                @Override
+                                public void onShowFailed() {
+                                }
+                                @Override
+                                public void onSpotClosed() {
+                                }
+                            });
                     pause = false;
                     imageLayout.pause();
                     pauseResumeButton.setText(R.string.resume);
@@ -129,6 +155,8 @@ public class MainActivity extends Activity {
                 finish();
             }
         });
+
+        showBanner();
     }
 
     @Override
@@ -143,4 +171,32 @@ public class MainActivity extends Activity {
         imageLayout.resume();
     }
 
+    /**
+     * Show Youmi Banner Ad.
+     */
+    private void showBanner() {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+        AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+        adView.setAdListener(new AdViewListener() {
+            @Override
+            public void onSwitchedAd(AdView arg0) {
+            }
+
+            @Override
+            public void onReceivedAd(AdView arg0) {
+            }
+
+            @Override
+            public void onFailedToReceivedAd(AdView arg0) {
+            }
+        });
+        this.addContentView(adView, layoutParams);
+    }
+
+    @Override
+    protected void onDestroy() {
+        SpotManager.getInstance(this).onDestroy();
+        super.onDestroy();
+    }
 }

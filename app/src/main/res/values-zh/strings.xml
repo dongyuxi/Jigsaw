@@ -30,4 +30,9 @@
     <string name="top_level">恭喜！已经通关这个英雄，换个英雄玩一玩吧？</string>
     <string name="contact_me">关于</string>
     <string name="contact_me_info">请通过dongyuxi2004@163.com联系我。</string>
+
+    <string name="wall_ad">免费赚金币</string>
+    <string name="insert_ad">点击有惊喜</string>
+    <string name="show_wall_ad">展示积分墙</string>
+    <string name="quit_wall_ad">退出积分墙</string>
 </resources>

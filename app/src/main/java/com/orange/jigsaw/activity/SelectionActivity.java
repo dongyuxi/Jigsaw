@@ -2,9 +2,11 @@ package com.orange.jigsaw.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -13,6 +15,10 @@ import com.orange.jigsaw.R;
 import com.orange.jigsaw.utils.HeroSelectionBackgroundImages;
 import com.orange.jigsaw.utils.PieceDifficultyUtils;
 import com.orange.jigsaw.view.HeroLayout;
+
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+import net.youmi.android.banner.AdViewListener;
 
 /**
  * Hero and difficulty select activity.
@@ -73,5 +79,28 @@ public class SelectionActivity extends Activity {
                 heroLayout.startGame(difficultySeekBar.getProgress() + 3);
             }
         });
+        showBanner();
     }
+
+    /**
+     * Show Youmi Banner Ad.
+     */
+    private void showBanner() {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+        AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+        adView.setAdListener(new AdViewListener() {
+            @Override
+            public void onSwitchedAd(AdView arg0) {
+            }
+            @Override
+            public void onReceivedAd(AdView arg0) {
+            }
+            @Override
+            public void onFailedToReceivedAd(AdView arg0) {
+            }
+        });
+        this.addContentView(adView, layoutParams);
+    }
+
 }

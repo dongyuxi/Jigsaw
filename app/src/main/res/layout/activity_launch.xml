@@ -27,4 +27,20 @@
         android:text="@string/quit"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/wallAdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wall_ad"
+        android:layout_toLeftOf="@id/contactMeButton"
+        android:layout_above="@id/quitGameButton"/>
+
+    <Button
+        android:id="@+id/insertAdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/insert_ad"
+        android:layout_toRightOf="@id/contactMeButton"
+        android:layout_above="@id/quitGameButton" />
 </RelativeLayout>

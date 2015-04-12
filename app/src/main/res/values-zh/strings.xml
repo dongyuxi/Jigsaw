@@ -18,12 +18,14 @@
     <string name="Time">时间</string>
 
     <string name="select_game">选择关卡</string>
+    <string name="selected_hero">SelectedIndex</string>
+    <string name="selected_piece">SelectedPiece</string>
     <string name="start_game">开始游戏</string>
 
     <string name="classic_style">经典头像</string>
     <string name="cute_style">Q版头像</string>
     <string name="easy">简单</string>
-    <string name="normal">正常</string>
+    <string name="normal">一般</string>
     <string name="hard">困难</string>
     <string name="nightmare">噩梦</string>
 

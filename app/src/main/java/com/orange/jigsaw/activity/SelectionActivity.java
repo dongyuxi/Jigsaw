@@ -2,6 +2,8 @@ package com.orange.jigsaw.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -17,10 +19,11 @@ import com.orange.jigsaw.view.HeroLayout;
  */
 public class SelectionActivity extends Activity {
     private HeroLayout heroLayout;
-    private Switch levelImageStyleSwitch;
+    private Switch heroBackgroundImageStyleSwitch;
     private SeekBar difficultySeekBar;
     private TextView pieceTextView;
     private TextView difficultyTextView;
+    private Button startGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,8 @@ public class SelectionActivity extends Activity {
         setContentView(R.layout.activity_selection);
 
         heroLayout = (HeroLayout)findViewById(R.id.jigsawLevelLayout);
-        levelImageStyleSwitch = (Switch)findViewById(R.id.levelImageStyleSwitch);
-        levelImageStyleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        heroBackgroundImageStyleSwitch = (Switch)findViewById(R.id.levelImageStyleSwitch);
+        heroBackgroundImageStyleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean on) {
                 if (on) {
@@ -72,6 +75,14 @@ public class SelectionActivity extends Activity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        startGameButton = (Button) findViewById(R.id.startGameButton);
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                heroLayout.startGame();
             }
         });
     }

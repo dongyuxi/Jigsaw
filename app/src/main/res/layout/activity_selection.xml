@@ -52,4 +52,14 @@
         android:layout_toRightOf="@id/difficultySeekBar"
         android:background="@drawable/field_circle"
         android:text="@string/easy"/>
+
+    <Button
+        android:id="@+id/startGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jigsawLevelLayout"
+        android:layout_centerHorizontal="true"
+        android:text="@string/start_game"
+        android:textSize="12sp"
+        android:singleLine="true"/>
 </RelativeLayout>

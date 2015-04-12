@@ -13,14 +13,14 @@ import com.orange.jigsaw.R;
  * Created by Orange on 2015/4/9.
  */
 public class LaunchActivity extends Activity {
-    private Button startGameButton;
+    private Button selectGameButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
 
-        startGameButton = (Button)findViewById(R.id.startGameButton);
-        startGameButton.setOnClickListener(new View.OnClickListener() {
+        selectGameButton = (Button)findViewById(R.id.selectGameButton);
+        selectGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();

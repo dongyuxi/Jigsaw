@@ -2,6 +2,10 @@ package com.orange.jigsaw.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -26,11 +30,14 @@ public class HeroLayout extends RelativeLayout {
     private int padding;
 
     /** Hero ImageView list. */
-    private ImageView levelImageViews[];
+    private ImageView heroImageViews[];
     /** Length of layout. */
     private int length;
     /** Length for each ImageView. */
     private int itemLength;
+
+    /** Hero Index. */
+    private int selectedHero = 0;
 
     /** Hero background image type style. */
     private HeroSelectionBackgroundImages.Style levelBackgroundImagesStyle = HeroSelectionBackgroundImages.Style.CUTE;
@@ -60,7 +67,7 @@ public class HeroLayout extends RelativeLayout {
         length = Math.min(getMeasuredWidth(), getMeasuredHeight());
         itemLength = (length - 2 * padding - (piece - 1) * margin) / piece;
 
-        initLevelImages();
+        initHeroImages();
 
         setMeasuredDimension(length, length);
     }
@@ -68,32 +75,39 @@ public class HeroLayout extends RelativeLayout {
     /**
      * Initialize level background images.
      */
-    private void initLevelImages() {
-        levelImageViews = new ImageView[piece * piece];
-        int[] levelBackgroundImagesIds = HeroSelectionBackgroundImages.getLevelBackgroundImages(this.levelBackgroundImagesStyle);
-        for (int i = 0; i < levelImageViews.length; i++) {
-            ImageView imageView = new ImageView(getContext());
+    private void initHeroImages() {
+        heroImageViews = new ImageView[piece * piece];
+        final int[] heroBackgroundImagesIds = HeroSelectionBackgroundImages.getHeroBackgroundImages(this.levelBackgroundImagesStyle);
+        for (int i = 0; i < heroImageViews.length; i++) {
+            final ImageView imageView = new ImageView(getContext());
+            imageView.setImageResource(heroBackgroundImagesIds[i]);
+            imageView.setPadding(padding, padding, padding, padding);
+            imageView.setId(i + 1);
+            if (i == selectedHero) {
+                imageView.setBackgroundColor(Color.RED);
+            }
             imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent();
-                    intent.setClass(getContext(), MainActivity.class);
-                    getContext().startActivity(intent);
+                    if (selectedHero != view.getId() - 1) {
+                        heroImageViews[selectedHero].setBackgroundColor(Color.BLACK);
+                        selectedHero = view.getId() - 1;
+                    }
+                    imageView.setBackgroundColor(Color.RED);
                 }
             });
-            imageView.setBackgroundResource(levelBackgroundImagesIds[i]);
-            imageView.setId(i + 1);
-            levelImageViews[i] = imageView;
+
+            heroImageViews[i] = imageView;
 
             LayoutParams layoutParams = new LayoutParams(itemLength, itemLength);
             if (0 != i % piece) {
                 layoutParams.leftMargin = margin;
-                layoutParams.addRule(RelativeLayout.RIGHT_OF, levelImageViews[i - 1].getId());
+                layoutParams.addRule(RelativeLayout.RIGHT_OF, heroImageViews[i - 1].getId());
             }
 
             if (i + 1 > piece) {
                 layoutParams.topMargin = margin;
-                layoutParams.addRule(RelativeLayout.BELOW, levelImageViews[i - piece].getId());
+                layoutParams.addRule(RelativeLayout.BELOW, heroImageViews[i - piece].getId());
             }
 
             addView(imageView, layoutParams);
@@ -108,7 +122,13 @@ public class HeroLayout extends RelativeLayout {
         this.removeAllViews();
         if (this.levelBackgroundImagesStyle != levelBackgroundImagesStyle) {
             this.levelBackgroundImagesStyle = levelBackgroundImagesStyle;
-            initLevelImages();
+            initHeroImages();
         }
+    }
+
+    public void startGame() {
+        Intent intent = new Intent();
+        intent.setClass(getContext(), MainActivity.class);
+        getContext().startActivity(intent);
     }
 }

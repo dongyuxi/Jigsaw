@@ -1,6 +1,7 @@
 package com.orange.jigsaw.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -14,8 +15,10 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.orange.jigsaw.R;
+import com.orange.jigsaw.activity.SelectionActivity;
 import com.orange.jigsaw.utils.ImagePiece;
 import com.orange.jigsaw.utils.ImageSpliter;
 
@@ -399,6 +402,12 @@ public class ImageLayout extends RelativeLayout implements View.OnClickListener 
         this.removeAllViews();
         animationLayout = null;
         piece++;
+        if (piece > 6) {
+            Toast.makeText(getContext(), R.string.top_level, Toast.LENGTH_SHORT);
+            Intent intent = new Intent();
+            intent.setClass(getContext(), SelectionActivity.class);
+            return;
+        }
         isGameSuccess = false;
         isGameOver = false;
         isGamePaused = false;

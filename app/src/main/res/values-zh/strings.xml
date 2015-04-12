@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">拼图游戏</string>
+    <string name="app_name">LOL拼图</string>
     <string name="game_info">游戏信息</string>
-    <string name="level_up">升级了！</string>
+    <string name="level_up">升级了！进入下一个难度！</string>
     <string name="game_over">游戏结束</string>
-    <string name="go">Go</string>
+    <string name="go">马上去</string>
     <string name="restart">重新开始</string>
     <string name="reset">从头再来</string>
     <string name="quit">退出</string>
@@ -16,6 +16,7 @@
     <string name="step">步数</string>
     <string name="Time">时间</string>
 
+    <string name="select_game">选择关卡</string>
     <string name="start_game">开始游戏</string>
 
     <string name="classic_style">经典头像</string>
@@ -24,4 +25,6 @@
     <string name="normal">正常</string>
     <string name="hard">困难</string>
     <string name="nightmare">噩梦</string>
+
+    <string name="top_level">恭喜！已经通关这个英雄，换个英雄玩一玩吧？</string>
 </resources>

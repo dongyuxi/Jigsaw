@@ -3,11 +3,11 @@ package com.orange.jigsaw.utils;
 import com.orange.jigsaw.R;
 
 /**
- * Class which holds the images for selecting heroes..
+ * Class which holds the images for selecting heroes.
  * Created by Orange on 2015/4/11.
  */
 public class HeroSelectionBackgroundImages {
-    private static final int[][] LEVEL_BACKGROUND_IMAGES = new int[][]
+    private static final int[][] HERO_BACKGROUND_IMAGES = new int[][]
             {
                     {
                             R.drawable.level1ashe0,
@@ -54,7 +54,8 @@ public class HeroSelectionBackgroundImages {
      * @param style
      * @return
      */
-    public static int[] getLevelBackgroundImages(Style style) {
-        return LEVEL_BACKGROUND_IMAGES[style.getIndex()];
+    public static int[] getHeroBackgroundImages(Style style) {
+        return HERO_BACKGROUND_IMAGES[style.getIndex()];
     }
+
 }
